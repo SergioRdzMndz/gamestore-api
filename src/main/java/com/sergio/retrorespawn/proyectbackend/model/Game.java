@@ -3,6 +3,8 @@ package com.sergio.retrorespawn.proyectbackend.model;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,6 +31,7 @@ public class Game {
     private String imageUrl;
     @Column(nullable = false)
     private Integer stock;
+    @CreationTimestamp
     @Column(name = "created_at", insertable = false, updatable = false)
     private LocalDateTime createdAt;
     @Column(name = "updated_at", insertable = false, updatable = false)
