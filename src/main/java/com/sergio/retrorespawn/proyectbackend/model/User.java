@@ -25,6 +25,8 @@ public class User {
     @Column(nullable = false)
     @JsonIgnore
     private String password;
+    @Column(nullable = false)
+    private String role = "USER";
     @Column(name = "created_at", insertable = false, updatable = false)
     private LocalDateTime createdAt;
     @Column(name = "updated_at", insertable = false, updatable = false)
@@ -37,6 +39,7 @@ public class User {
         this.username = username; 
         this.email = email;
         this.password = password;
+        this.role = "USER";
     }
 
     public Long getId() {
@@ -87,8 +90,18 @@ public class User {
         this.updatedAt = updatedAt;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     @Override
     public String toString() {
         return "id: " + id + " | username: " + username + " | email: " + email + " | created at: " + createdAt;
     }
+
+    
 }

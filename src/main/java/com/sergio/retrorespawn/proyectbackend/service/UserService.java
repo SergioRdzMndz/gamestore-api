@@ -25,7 +25,7 @@ public class UserService {
     }
 
     public UserResponseDTO toResponseDTO(User user){
-        return new UserResponseDTO(user.getUsername(), user.getEmail(), user.getCreatedAt());
+        return new UserResponseDTO(user.getUsername(), user.getEmail(), user.getCreatedAt(),user.getRole());
     }
 
     public List<UserResponseDTO> getAllUsers(){
