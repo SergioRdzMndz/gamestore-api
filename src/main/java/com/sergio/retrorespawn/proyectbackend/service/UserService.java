@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.sergio.retrorespawn.proyectbackend.dto.UserRequestDTO;
@@ -14,14 +16,16 @@ import com.sergio.retrorespawn.proyectbackend.repository.CartRepository;
 import com.sergio.retrorespawn.proyectbackend.repository.UserRepository;
 
 @Service
-public class UserService {
+public class UserService{
 
     private final UserRepository userRepository;
     private final CartRepository cartRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository, CartRepository cartRepository){
+    public UserService(UserRepository userRepository, CartRepository cartRepository, PasswordEncoder passwordEncoder){
         this.userRepository = userRepository;
         this.cartRepository = cartRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public UserResponseDTO toResponseDTO(User user){
@@ -40,7 +44,7 @@ public class UserService {
         User user = new User(
             userRequestDTO.getUsername(),
             userRequestDTO.getEmail(),
-            userRequestDTO.getPassword()
+            passwordEncoder.encode(userRequestDTO.getPassword())
         );
         userRepository.save(user);
 
@@ -59,7 +63,7 @@ public class UserService {
             u.setUsername(userRequestDTO.getUsername());
             verifyEmail(id,userRequestDTO.getEmail());
             u.setEmail(userRequestDTO.getEmail());
-            u.setPassword(userRequestDTO.getPassword());
+            u.setPassword(passwordEncoder.encode(userRequestDTO.getPassword()));
             return toResponseDTO(userRepository.save(u));
         }).orElseThrow(()-> new RuntimeException("User not found"));
 
@@ -83,4 +87,5 @@ public class UserService {
             throw new RuntimeException("Email already exists");
         }
     }
+
 }

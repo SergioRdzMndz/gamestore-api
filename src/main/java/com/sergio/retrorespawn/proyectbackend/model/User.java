@@ -1,6 +1,12 @@
 package com.sergio.retrorespawn.proyectbackend.model;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -13,7 +19,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,11 +38,11 @@ public class User {
     @Column(name = "updated_at", insertable = false, updatable = false)
     private LocalDateTime updatedAt;
 
-    public User(){
+    public User() {
     }
 
-    public User(String username, String email, String password){
-        this.username = username; 
+    public User(String username, String email, String password) {
+        this.username = username;
         this.email = email;
         this.password = password;
         this.role = "USER";
@@ -51,7 +57,7 @@ public class User {
     }
 
     public String getUsername() {
-        return username;
+        return email;
     }
 
     public void setUsername(String username) {
@@ -66,6 +72,7 @@ public class User {
         this.email = email;
     }
 
+    @Override
     public String getPassword() {
         return password;
     }
@@ -103,5 +110,30 @@ public class User {
         return "id: " + id + " | username: " + username + " | email: " + email + " | created at: " + createdAt;
     }
 
-    
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority("ROLE_" + role));
+    }
+
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return UserDetails.super.isAccountNonExpired();
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return UserDetails.super.isAccountNonLocked();
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return UserDetails.super.isCredentialsNonExpired();
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return UserDetails.super.isEnabled();
+    }
+
 }
