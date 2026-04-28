@@ -36,6 +36,7 @@ Base URL: `https://gamestore-api-mrqt.onrender.com`
 - Global exception handling
 
 ## Project Structure
+```
 src/main/java/com/sergio/retrorespawn/
 ├── controller/    # REST controllers
 ├── service/       # Business logic
@@ -44,8 +45,8 @@ src/main/java/com/sergio/retrorespawn/
 ├── dto/           # Data Transfer Objects
 ├── security/      # JWT configuration
 ├── filter/        # JWT authentication filter
-├── config/        # App configuration
 └── exception/     # Global exception handler
+```
 
 ## Authentication
 This API uses JWT Bearer tokens. To access protected endpoints, include the token in the request header:
