@@ -30,11 +30,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        System.out.println("Filter reached: " + request.getRequestURI()); // <- agrega esto
+        System.out.println("Filter reached: " + request.getRequestURI()); 
         String authHeader = request.getHeader("Authorization");
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            System.out.println("No token, passing through"); // <- agrega esto
+            System.out.println("No token, passing through"); 
             filterChain.doFilter(request, response);
             return;
         }
