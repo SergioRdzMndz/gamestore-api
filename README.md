@@ -159,5 +159,5 @@ mvn spring-boot:run
 ```
 
 ## Author
-**Sergio Rodríguez**
+**Sergio Rodríguez Mendoza**
 - GitHub: [@SergioRdzMndz](https://github.com/SergioRdzMndz)
