@@ -156,7 +156,7 @@ jwt.expiration=86400000
 
 3. Run the application
 ```bash
-mvn spring-boot:run
+mvnw spring-boot:run
 ```
 
 ## Author
