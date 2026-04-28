@@ -12,6 +12,10 @@ This project follows a **layered architecture** pattern, separating concerns acr
 
 This separation of concerns ensures the codebase remains maintainable, scalable and easy to test.
 
+## Database Diagram
+
+![ER Diagram](README-assets/er-diagram.png)
+
 ## Live Demo
 Base URL: `https://gamestore-api-mrqt.onrender.com`
 
